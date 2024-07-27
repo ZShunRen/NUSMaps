@@ -15,7 +15,6 @@ import MapView, {
   Marker,
   Polyline,
   LatLng,
-  Callout,
 } from "react-native-maps";
 import { SubwayTypeCard } from "@/components/detailedRouteScreen/SubwayType";
 import { BusNumberCard } from "@/components/detailedRouteScreen/BusNumber";
@@ -228,10 +227,10 @@ const PublicTransportLegPart: React.FC<PublicTransportLegProps> = ({
         </Text>
         <View style={{ flexDirection: "row" }}>
           {ptLeg.type === "SUBWAY" && (
-            <SubwayTypeCard serviceType={ptLeg.serviceType} />
+            <SubwayTypeCard serviceType={ptLeg.serviceType} testID="subtype"/>
           )}
           {(ptLeg.type === "BUS" || ptLeg.type === "NUS_BUS") && (
-            <BusNumberCard busNumber={ptLeg.serviceType} busType={ptLeg.type} />
+            <BusNumberCard busNumber={ptLeg.serviceType} busType={ptLeg.type} testID="subtype" />
           )}
           {ptLeg.type === "NUS_BUS" && (
             <Text>
@@ -246,7 +245,7 @@ const PublicTransportLegPart: React.FC<PublicTransportLegProps> = ({
           )}
           {ptLeg.type === "TRAM" && (
             // <Image source={iconList[ptLeg.type as keyof IconCatalog]} />
-            <TramTypeCard serviceType={ptLeg.serviceType} />
+            <TramTypeCard serviceType={ptLeg.serviceType} testID="subtype"/>
           )}
         </View>
         <View style={{ flexDirection: "column" }}>
@@ -299,9 +298,7 @@ const WalkLegPart: React.FC<WalkLegProps> = ({ walkLeg, legHeight }) => {
   );
 };
 
-const DetailedRouteScreen: React.FC<
-  baseResultsCardType & destinationType & LatLng
-> = () => {
+const DetailedRouteScreen: React.FC = () => {
   //add a base current location and end flag
   const params = useLocalSearchParams();
   // console.log("destination type:", params.destination);
@@ -356,6 +353,7 @@ const DetailedRouteScreen: React.FC<
   return (
     <View style={stylesheet.SafeAreaView}>
       <MapView
+        testID="current-location-map"
         style={stylesheet.MapView}
         provider={PROVIDER_GOOGLE}
         initialRegion={{
@@ -367,6 +365,7 @@ const DetailedRouteScreen: React.FC<
         }}
       >
         <Marker
+          testID="current-location-marker"
           title="Origin"
           coordinate={{
             latitude: origin.latitude,
@@ -389,6 +388,7 @@ const DetailedRouteScreen: React.FC<
           }
         })}
         <Marker
+          testID="destination-location-marker"
           title="Destination"
           coordinate={{
             latitude: destination.latitude,

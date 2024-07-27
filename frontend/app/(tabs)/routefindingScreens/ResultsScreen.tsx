@@ -28,9 +28,8 @@ const iconList: IconCatalog = {
 };
 
 //constant variables
-// const apiKey = process.env.EXPO_PUBLIC_MAPS_API_KEY;
 //USE THIS FOR PRODUCTION BUILDS
-const apiKey = process.env.EXPO_PUBLIC_MAPS_API_KEY || Constants.expoConfig.extra.EXPO_PUBLIC_MAPS_API_KEY;
+const apiKey = process.env.EXPO_PUBLIC_GOOGLEMAPS_API_KEY || Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLEMAPS_API_KEY;
 
 //result card(singular card)
 const ResultCard: React.FC<SingleResultCardData & {testId:string}> = ({ origin, destination, resultData, testId }) => {
@@ -60,26 +59,26 @@ const ResultCard: React.FC<SingleResultCardData & {testId:string}> = ({ origin, 
                 const ptLeg = resultData.journeyLegs[Math.floor(index / 2)] as PublicTransportLeg;
                 return (
                   <View key={`bus-${index}`} style={styles.iconWrapper}>
-                    <BusNumberCard busNumber={ptLeg.serviceType} busType={ptLeg.type} />
+                    <BusNumberCard busNumber={ptLeg.serviceType} busType={ptLeg.type} testID= {`${testId}-BusNumberCard${index}`}/>
                   </View>
-                );
+                ) 
               } else if (icon === "SUBWAY") {
                 const ptLeg = resultData.journeyLegs[Math.floor(index / 2)] as PublicTransportLeg;
                 return (
                   <View key={`subway-${index}`} style={styles.iconWrapper}>
-                    <SubwayTypeCard serviceType={ptLeg.serviceType} />
+                    <SubwayTypeCard serviceType={ptLeg.serviceType} testID= {`${testId}-SubwayTypeCard${index}`} />
                   </View>
                 );
               } else if (icon === "TRAM") {
                 const ptLeg = resultData.journeyLegs[Math.floor(index / 2)] as PublicTransportLeg;
                 return (
                   <View key={`tram-${index}`} style={styles.iconWrapper}>
-                    <TramTypeCard serviceType={ptLeg.serviceType} />
+                    <TramTypeCard serviceType={ptLeg.serviceType} testID= {`${testId}-TramTypeCard${index}`}/>
                   </View>
                 );
               } else {
                 return (
-                  <View key={`icon-${index}`} style={styles.iconWrapper}>
+                  <View key={`icon-${index}`} style={styles.iconWrapper} testID= {`${testId}-WalkCard${index}`}>
                     <MaterialIcons
                       key={`icon-${index}`}
                       size={22}

@@ -312,7 +312,7 @@ const handleRouting = async (origin, destination) => {
     sendProgress(res, progress += 20);
     console.log("Code 1: Origin in NUS, Destination Not in NUS");
     const result = await axios.post(
-      "https://nusmaps.onrender.com/NUSBusRoutes",
+      "https://test-nusmaps.onrender.com/NUSBusRoutes",
       { origin, destination },
       { headers: { "Content-Type": "application/json" } }
     );
@@ -327,7 +327,7 @@ const handleRouting = async (origin, destination) => {
             headers: { Authorization: ONEMAPAPIKEY },
             }),
             axios.post(
-                "https://nusmaps.onrender.com/NUSBusRoutes",
+                "https://test-nusmaps.onrender.com/NUSBusRoutes",
                 { origin: nusStopCoords, destination },
                 { headers: { "Content-Type": "application/json" } }
             ),
@@ -362,7 +362,7 @@ const handleRouting = async (origin, destination) => {
       const nusStopCoords = TEMP_NUS_BUS_STOPS_COORDS.get(nusStop);
       return [
       axios.post(
-              "https://nusmaps.onrender.com/NUSBusRoutes",
+              "https://test-nusmaps.onrender.com/NUSBusRoutes",
               { origin, destination:nusStopCoords },
               { headers: { "Content-Type": "application/json" } }
           ),
